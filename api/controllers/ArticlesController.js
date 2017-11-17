@@ -12,6 +12,15 @@ module.exports = {
             res.view('articles/list', { articles })
         })
     },
+    findArticles: (req, res) => {
+        const id = req.params.id
+        console.log(id)
+        return Articles.findOne({ id }).exec((err, article) => {
+            if (err) return res.send(500, { err: 'Database error: ' + err.message })
+            return res.view('articles/view', { article })
+        })
+    },
+
     add: function (req, res) {
         return res.view('articles/add')
     },
